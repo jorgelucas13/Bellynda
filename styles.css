@@ -5,6 +5,9 @@
     --max-width: 1200px;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 *{
     padding: 0;
     margin: 0;
@@ -224,83 +227,87 @@ body{
 
 /* INICIO CARROSSEL */
 
-   .carousel-container {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .carousel {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-
-    .carousel-item {
-      flex: 0 0 550px;
-      height: 350px;
-      margin: 0 10px;
-      opacity: 0.5;
-      transition: transform 0.5s ease, opacity 0.5s ease;
-      transform: scale(0.9);
-    }
-
-    .carousel-item.active {
-      opacity: 1;
-      transform: scale(1);
-    }
-
-    .carousel-item img {
-      width: 100%;
-        max-width: 550px;
-      height: auto;
-      object-fit: cover;
-      border-radius: 12px;
-        aspect-ratio: 11 / 7;
-        object-fit: cover;
-         transition: transform 0.3s ease, opacity 0.3s ease;
-    }
-
-    .nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 50px;
-      background: white;
-      border: none;
-      border-radius: 50%;
-      width: 80px;
-      height: 80px;
-      cursor: pointer;
-      z-index: 1;
-      color: #333;
-    }
-
-    .nav.prev { left: 20px; }
-    .nav.next { right: 20px; }
-
-    .dots {
-        display: flex;
-        justify-self: center;
-      margin-top: 20px;
-      display: flex;
-      gap: 8px;
-    }
-
-    .dots button {
-      width: 10px;
-      height: 10px;
-      background-color: #ccc;
-      border: none;
-      border-radius: 50%;
-      cursor: pointer;
-    }
-
-    .dots button.active {
-      background-color: #333;
-    }
+        .slider-container1 {
+    position: relative;
+    overflow: hidden; 
+    border-radius: 0.5rem; 
+    max-width: 64rem; 
+    margin: 0 auto; /* <- isso centraliza */
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); 
+        }
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .slide {
+            min-width: 100%;
+            box-sizing: border-box;
+        }
+        .image{
+          object-fit: cover; 
+          object-position: top; 
+          width: 100%; 
+          height: 100%; 
+        }
+        .slider-nav-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0, 0, 0, 0.3);
+            color: white;
+            border: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .slider-nav-button:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .prev {
+            left: 20px;
+        }
+        .next {
+            right: 20px;
+        }
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ccc;
+            margin: 0 6px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .dot.active {
+            background-color: #3b82f6;
+        }
+        @media (max-width: 768px) {
+            .slider-nav-button {
+                width: 40px;
+                height: 40px;
+            }
+            .prev {
+                left: 10px;
+            }
+            .next {
+                right: 10px;
+            }
+            .dot {
+                width: 10px;
+                height: 10px;
+                margin: 0 5px;
+            }
+        }
 
     /* TITULO DO SLIDE */
     .container_tittle{
@@ -659,13 +666,16 @@ footer a {
 @media (width > 768px) {
     .nav__links > div li:not(:first-child) {
         display: block;
+        justify-content: space-between;
     }
 
     .nav__links > div {
         display: flex;
+        
         align-items: center;
         gap: 2rem;
     }
+
 
         .section__container h1, .section__container h2{
         font-size: 7rem;
@@ -678,7 +688,6 @@ footer a {
     display: block;
     order: 3;
   }
-
   .nav__menu {
     position: absolute;
     top: 80px;
@@ -691,7 +700,9 @@ footer a {
     gap: 3rem;
     z-index: 80;
   }
-
+    .nav__links img{
+      max-width: 150px;
+    }
   .nav__menu.show {
     display: flex;
   }
@@ -766,8 +777,8 @@ footer a {
 
 @media (max-width: 360px) {
         .nav__links{
-        padding: 10px 0px;
+        padding: 0px 0px;
         margin: 0;
-        gap: 10px;
+        gap: 5px;
     }
 }
