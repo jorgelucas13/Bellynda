@@ -101,7 +101,7 @@
 <section class="container_produtos" id="produtos">
     <h2>PRODUTOS</h2>
     <div class="slider-container">
-        <div class="card-wrapper">
+        <div class="card-wrapper" id="produtos-container">
             <div class="card">
                 <div class="image-box">
                     <img src="assets/p1.jpg" alt="produto 1">
@@ -254,5 +254,32 @@
 </footer>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="main.js"></script>
+    <script>
+async function carregarProdutos() {
+  const container = document.getElementById('produtos-container');
+  container.innerHTML = 'Carregando...';
+  try {
+    const resp = await fetch('http://localhost:3000/produtos');
+    const produtos = await resp.json();
+    container.innerHTML = '';
+    produtos.forEach(produto => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <div class="image-box">
+          <img src="${produto.imagem}" alt="${produto.nome}">
+        </div>
+        <div class="name">
+          <h3 class="produto">${produto.nome}</h3>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  } catch (err) {
+    container.innerHTML = 'Erro ao carregar produtos!';
+  }
+}
+carregarProdutos();
+</script>
 </body>
 </html>
