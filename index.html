@@ -254,12 +254,12 @@
 </footer>
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="main.js"></script>
-    <script>
+<script>
 async function carregarProdutos() {
   const container = document.getElementById('produtos-container');
   container.innerHTML = 'Carregando...';
   try {
-    const resp = await fetch('http://localhost:3000/produtos');
+    const resp = await fetch('https://notion-backend-pwpx.onrender.com/produtos'); // 🔁 troque pela URL real do Render
     const produtos = await resp.json();
     container.innerHTML = '';
     produtos.forEach(produto => {
@@ -276,9 +276,15 @@ async function carregarProdutos() {
       container.appendChild(card);
     });
   } catch (err) {
+    console.error('Erro ao buscar produtos:', err);
     container.innerHTML = 'Erro ao carregar produtos!';
   }
 }
+
+// ⚡ Chamar automaticamente ao carregar a página
+document.addEventListener('DOMContentLoaded', carregarProdutos);
+</script>
+
 carregarProdutos();
 </script>
 </body>
